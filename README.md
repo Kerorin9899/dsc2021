@@ -11,7 +11,7 @@ Data Science Challenge 2021の課題の回答プログラムです
 ├ README.md
 │
 ├ weights 重みが保存される
-│  └ weight.pth
+│  └ weight.pth // デフォルトの重み
 |
 ├ input_data
 |  ├ train
