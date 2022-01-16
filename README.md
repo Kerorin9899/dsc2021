@@ -65,11 +65,11 @@ Encoderの後にPositional Encodingを導入した
 
 以下の論文を参考にモデルを構築した
 
-*Robust Motion In-betweening*  
+*Robust Motion In-betweening*[1]  
 https://static-wordpress.akamaized.net/montreal.ubisoft.com/wp-content/uploads/2020/07/09155337/RobustMotionInbetweening.pdf
 (Félix G. Harvey and Mike Yurick and Derek Nowrouzezahrai and Christopher Pal, ACM Transactions on Graphics,39,4,2020)
 
-*Recurrent Transition Networks for Character Locomotion*  
+*Recurrent Transition Networks for Character Locomotion*[2]  
 https://arxiv.org/ftp/arxiv/papers/1810/1810.02363.pdf
 (Harvey et al. 2018)
 
@@ -80,6 +80,17 @@ https://arxiv.org/ftp/arxiv/papers/1810/1810.02363.pdf
 基本的構造は*Robust Motion In-betweening*を参考にしている  
 しかし、こちらの論文ではQuatanionデータも使用して、Forward Kinematicsを用いるなどして精度を向上させていた  
 今回の課題では、データがポジションのみなので*Recurrent Transition Networks for Character Locomotion*改良前のこちらの論文を参考にしてモデル構築を行った
+
+# 本手法
+
+本手法は、まず入力としてキーフレームの最初のフレームのrelative position x_tを使用する。relative positionは、hipのx,y,z座標を中心として、ほかの関節の座標の相対位置を格納したものである。  
+また、２つ目の入力として、目標となるキーフレームのrelative position y_tを用いて、最後の３つ目にその目標となるキーフレームと最初のキーフレームの各関節ごとの差o_tを用いる。  
+これらは*Robust Motion In-betweening*[1]や*Recurrent Transition Networks for Character Locomotion*[2]でも用いられている。  
+  
+参考にした論文と違う点は、まず*Robust Motion In-betweening*[1]では、Quaternionを用いているが今回のデータにはそぐわない、*Recurrent Transition Networks for Character Locomotion*[2]こちらの論文では、地形情報を加味したものであったが、今回は平面であると仮定しているのでこの２つの手法の中間をとったような構造としている。  
+  
+その後の構造は、元の論文の通りである。このモデルは、実際に出力するのは次のフレームの予測座標までの差であるので、入力フレームにそれを足し合わせて、relative positionから世界座標系へと変換する。  
+これをフレームが埋まるまで連続的に行うことでフレームを補間する
 
 # Requirement
 
