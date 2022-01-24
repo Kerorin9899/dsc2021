@@ -36,6 +36,8 @@ Data Science Challenge 2021の課題の回答プログラムです
 └ models.pdf モデルの全体図PDF
 ```
 
+※著作権の関係で一部データを省いています
+
 # モデル概要 
 
 Encoder-Recurrent-Decoderのモデルを使用  
