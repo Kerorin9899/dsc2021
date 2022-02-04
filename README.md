@@ -1,7 +1,12 @@
 # dsc2021
 
 atheleticsで開催されたバンダイナムコ様の  
-Data Science Challenge 2021の課題の回答プログラムです
+Data Science Challenge 2021
+https://github.com/BandaiNamcoResearchInc/dsc2021_data
+課題の回答プログラムです
+
+成績は総合8位
+学生で５位の結果となりました
 
 # ファイル構成
 
